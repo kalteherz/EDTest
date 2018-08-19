@@ -32,8 +32,8 @@
             this.pbReverseProgress = new System.Windows.Forms.ToolStripProgressBar();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.btnSetFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnRunReverse = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnPause = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnRunStopReverse = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnPauseResume = new System.Windows.Forms.ToolStripMenuItem();
             this.tbLog = new System.Windows.Forms.TextBox();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.statusStrip.SuspendLayout();
@@ -60,8 +60,8 @@
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnSetFile,
-            this.btnRunReverse,
-            this.btnPause});
+            this.btnRunStopReverse,
+            this.btnPauseResume});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(602, 24);
@@ -77,18 +77,18 @@
             // 
             // btnRunReverse
             // 
-            this.btnRunReverse.Name = "btnRunReverse";
-            this.btnRunReverse.Size = new System.Drawing.Size(104, 20);
-            this.btnRunReverse.Text = "Запуск реверса";
-            this.btnRunReverse.Click += new System.EventHandler(this.btnRunReverse_Click);
+            this.btnRunStopReverse.Name = "btnRunReverse";
+            this.btnRunStopReverse.Size = new System.Drawing.Size(104, 20);
+            this.btnRunStopReverse.Text = "Запуск реверса";
+            this.btnRunStopReverse.Click += new System.EventHandler(this.btnRunReverse_Click);
             // 
             // btnPause
             // 
-            this.btnPause.Name = "btnPause";
-            this.btnPause.Size = new System.Drawing.Size(51, 20);
-            this.btnPause.Text = "Пауза";
-            this.btnPause.Visible = false;
-            this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
+            this.btnPauseResume.Name = "btnPause";
+            this.btnPauseResume.Size = new System.Drawing.Size(51, 20);
+            this.btnPauseResume.Text = "Пауза";
+            this.btnPauseResume.Visible = false;
+            this.btnPauseResume.Click += new System.EventHandler(this.btnPause_Click);
             // 
             // tbLog
             // 
@@ -131,8 +131,8 @@
         private System.Windows.Forms.TextBox tbLog;
         private System.Windows.Forms.ToolStripProgressBar pbReverseProgress;
         private System.Windows.Forms.ToolStripMenuItem btnSetFile;
-        private System.Windows.Forms.ToolStripMenuItem btnRunReverse;
-        private System.Windows.Forms.ToolStripMenuItem btnPause;
+        private System.Windows.Forms.ToolStripMenuItem btnRunStopReverse;
+        private System.Windows.Forms.ToolStripMenuItem btnPauseResume;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
     }
 }

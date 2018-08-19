@@ -32,9 +32,9 @@ namespace FileReverse
             Logger.PausedEvent += OnPaused;
             Logger.ResumedEvent += OnResumed;
 
-            btnPauseText = btnPause.Text;
+            btnPauseText = btnPauseResume.Text;
             btnResumeText = "Продолжить";
-            btnRunReverseText = btnRunReverse.Text;
+            btnRunReverseText = btnRunStopReverse.Text;
             btnStopReverseText = "Прервать";
         }
 
@@ -81,7 +81,7 @@ namespace FileReverse
 
         private void btnRunReverse_Click(object sender, EventArgs e)
         {
-            btnRunReverse.Enabled = false;
+            btnRunStopReverse.Enabled = false;
             if (Reverser == null)
             {
                 StartReverse();
@@ -90,13 +90,13 @@ namespace FileReverse
             {
                 StopReverse();
             }
-            btnRunReverse.Enabled = true;
+            btnRunStopReverse.Enabled = true;
         }
 
 
         private void btnPause_Click(object sender, EventArgs e)
         {
-            btnPause.Enabled = false;
+            btnPauseResume.Enabled = false;
             var reverser = Reverser;
             if (reverser == null)
             {

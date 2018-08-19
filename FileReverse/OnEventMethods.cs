@@ -14,9 +14,11 @@ namespace FileReverse
 
             Invoke((MethodInvoker)delegate
             {
-                btnPause.Enabled = true;
-                btnPause.Visible = true;
-                btnRunReverse.Text = btnStopReverseText;
+                btnPauseResume.Text = btnPauseText;
+                btnPauseResume.Enabled = true;
+                btnPauseResume.Visible = true;
+
+                btnRunStopReverse.Text = btnStopReverseText;
                 btnSetFile.Enabled = false;
             });
         }
@@ -27,13 +29,13 @@ namespace FileReverse
             OnInfo(sender, message);
             Invoke((MethodInvoker)delegate
             {
-                btnPause.Visible = false;
-                btnRunReverse.Text = btnRunReverseText;
+                btnPauseResume.Visible = false;
+                btnRunStopReverse.Text = btnRunReverseText;
                 btnSetFile.Enabled = true;
             });
 
             Reverser = null;
-            btnRunReverse.Text = btnRunReverseText;
+            btnRunStopReverse.Text = btnRunReverseText;
         }
 
 
@@ -60,8 +62,8 @@ namespace FileReverse
             OnInfo(sender, message);
             Invoke((MethodInvoker)delegate
             {
-                btnPause.Text = btnResumeText;
-                btnPause.Enabled = true;
+                btnPauseResume.Text = btnResumeText;
+                btnPauseResume.Enabled = true;
             });
         }
 
@@ -71,8 +73,8 @@ namespace FileReverse
             OnInfo(sender, message);
             Invoke((MethodInvoker)delegate
             {
-                btnPause.Text = btnPauseText;
-                btnPause.Enabled = true;
+                btnPauseResume.Text = btnPauseText;
+                btnPauseResume.Enabled = true;
             });
         }
 
