@@ -23,6 +23,7 @@ namespace FileReverse
             if (!File.Exists(openFileDialog.FileName))
             {
                 OnError(this, $"Файл {openFileDialog.FileName} не существует!");
+                return;
             }
 
             Reverser = new Reverser(openFileDialog.FileName, Logger);
