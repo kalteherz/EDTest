@@ -14,6 +14,7 @@ namespace FileReverse
         private readonly string btnResumeText;
         private readonly string btnRunReverseText;
         private readonly string btnStopReverseText;
+        private readonly string FormCaption;
 
         private Reverser Reverser;
 
@@ -36,10 +37,11 @@ namespace FileReverse
             btnResumeText = "Продолжить";
             btnRunReverseText = btnRunStopReverse.Text;
             btnStopReverseText = "Прервать";
-        }
+            FormCaption = Text;
+    }
 
 
-        private void ScreenLog(LogLevel logLevel, string message)
+    private void ScreenLog(LogLevel logLevel, string message)
         {
             string logMessage = $"{DateTime.Now.ToString("yyyy.MM.dd HH:mm:ss")} {logLevel.Name.ToUpper()} {message}{Environment.NewLine}";
 
@@ -129,11 +131,11 @@ namespace FileReverse
             }
             if (!string.IsNullOrEmpty(openFileDialog.FileName))
             {
-                Text = $"File Reverse | {Path.GetFileName(openFileDialog.FileName)}";
+                Text = $"{FormCaption} | {Path.GetFileName(openFileDialog.FileName)}";
             }
             else
             {
-                Text = $"File Reverse";
+                Text = $"{FormCaption}";
             }
             return result;
         }
