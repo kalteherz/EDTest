@@ -75,16 +75,16 @@
             this.btnSetFile.Text = "Файл";
             this.btnSetFile.Click += new System.EventHandler(this.btnSetFile_Click);
             // 
-            // btnRunReverse
+            // btnRunStopReverse
             // 
-            this.btnRunStopReverse.Name = "btnRunReverse";
+            this.btnRunStopReverse.Name = "btnRunStopReverse";
             this.btnRunStopReverse.Size = new System.Drawing.Size(104, 20);
             this.btnRunStopReverse.Text = "Запуск реверса";
             this.btnRunStopReverse.Click += new System.EventHandler(this.btnRunReverse_Click);
             // 
-            // btnPause
+            // btnPauseResume
             // 
-            this.btnPauseResume.Name = "btnPause";
+            this.btnPauseResume.Name = "btnPauseResume";
             this.btnPauseResume.Size = new System.Drawing.Size(51, 20);
             this.btnPauseResume.Text = "Пауза";
             this.btnPauseResume.Visible = false;
@@ -100,6 +100,7 @@
             this.tbLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.tbLog.Size = new System.Drawing.Size(602, 300);
             this.tbLog.TabIndex = 4;
+            this.tbLog.WordWrap = false;
             // 
             // MainForm
             // 
