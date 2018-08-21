@@ -54,11 +54,22 @@ namespace FileReverse
                     byte[]
                         leftBuffer = new byte[bufferSize],
                         rightBuffer = new byte[bufferSize],
-                        rightReverse = null,
-                        leftReverse = null;
+                        rightReverse = new byte[bufferSize],
+                        leftReverse = new byte[bufferSize];
 
                     var progressStep = (double)bufferSize / halfFileLength * 100.0;
                     var progressPercent = 0.0;
+
+
+                    void fastReverse(byte[] source, byte[] reverse)
+                    {
+                        var length = source.Length;
+                        for (var i = 0; i < length; i++)
+                        {
+                            reverse[length - i - 1] = source[i];
+                        }
+                    }
+
 
                     for (long leftOffset = 0; leftOffset < halfFileLength; leftOffset += bufferSize)
                     {
@@ -80,6 +91,8 @@ namespace FileReverse
                         {
                             leftBuffer = new byte[count];
                             rightBuffer = new byte[count];
+                            leftReverse = new byte[count];
+                            rightReverse = new byte[count];
                         }
 
                         long rightOffset = fileLength - leftOffset - count;
@@ -94,8 +107,8 @@ namespace FileReverse
                         #endregion
 
                         #region Reverse
-                        var leftReverseTask = new Task(() => leftReverse = leftBuffer.Reverse().ToArray());
-                        var rightReverseTask = new Task(() => rightReverse = rightBuffer.Reverse().ToArray());
+                        var leftReverseTask = new Task(() => fastReverse(leftBuffer, leftReverse));
+                        var rightReverseTask = new Task(() => fastReverse(rightBuffer, rightReverse));
                         leftReverseTask.Start();
                         rightReverseTask.Start();
                         await Task.WhenAll(leftReverseTask, rightReverseTask);
