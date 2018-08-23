@@ -8,7 +8,7 @@ namespace FileReverse
 {
     public class Reverser
     {
-        private const int MaxBufferSize = 1 * 1024 * 1024;
+        private const int MaxBufferSize = 8 * 1024 * 1024;
 
         private string FileName;
         private ProgramLogger Logger;
