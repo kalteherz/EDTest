@@ -8,7 +8,7 @@ namespace FileReverse
 {
     public class Reverser
     {
-        private const int MaxBufferSize = 32 * 1024 * 1024;
+        private const int MaxBufferSize = 1 * 1024 * 1024;
 
         private string FileName;
         private ProgramLogger Logger;
@@ -49,7 +49,7 @@ namespace FileReverse
                 {
                     var fileLength = fileStream.Length;
                     var halfFileLength = fileStream.Length / 2;
-                    var bufferSize = Math.Min(halfFileLength, MaxBufferSize);
+                    var bufferSize = Convert.ToInt32(Math.Min(halfFileLength, MaxBufferSize));
 
                     byte[]
                         leftBuffer = new byte[bufferSize],
@@ -61,9 +61,8 @@ namespace FileReverse
                     var progressPercent = 0.0;
 
 
-                    void fastReverse(byte[] source, byte[] reverse)
+                    void fastReverse(byte[] source, byte[] reverse, int length)
                     {
-                        var length = source.Length;
                         for (var i = 0; i < length; i++)
                         {
                             reverse[length - i - 1] = source[i];
@@ -87,13 +86,6 @@ namespace FileReverse
 
                         #region Calc Offsets and Count
                         var count = Convert.ToInt32(Math.Min(halfFileLength - leftOffset, bufferSize));
-                        if (count < bufferSize)
-                        {
-                            leftBuffer = new byte[count];
-                            rightBuffer = new byte[count];
-                            leftReverse = new byte[count];
-                            rightReverse = new byte[count];
-                        }
 
                         long rightOffset = fileLength - leftOffset - count;
                         #endregion
@@ -107,8 +99,8 @@ namespace FileReverse
                         #endregion
 
                         #region Reverse
-                        var leftReverseTask = new Task(() => fastReverse(leftBuffer, leftReverse));
-                        var rightReverseTask = new Task(() => fastReverse(rightBuffer, rightReverse));
+                        var leftReverseTask = new Task(() => fastReverse(leftBuffer, leftReverse, count));
+                        var rightReverseTask = new Task(() => fastReverse(rightBuffer, rightReverse, count));
                         leftReverseTask.Start();
                         rightReverseTask.Start();
                         await Task.WhenAll(leftReverseTask, rightReverseTask);
@@ -116,10 +108,10 @@ namespace FileReverse
 
                         #region Write
                         fileStream.Seek(leftOffset, SeekOrigin.Begin);
-                        await fileStream.WriteAsync(rightReverse, 0, count, CancellationTokenSource.Token);
+                        await fileStream.WriteAsync(rightReverse, bufferSize - count, count, CancellationTokenSource.Token);
 
                         fileStream.Seek(rightOffset, SeekOrigin.Begin);
-                        await fileStream.WriteAsync(leftReverse, 0, count, CancellationTokenSource.Token);
+                        await fileStream.WriteAsync(leftReverse, bufferSize - count, count, CancellationTokenSource.Token);
                         #endregion
 
                         progressPercent = Math.Min(100, progressPercent + progressStep);
